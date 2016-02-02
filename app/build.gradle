@@ -25,7 +25,8 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.1.1'
     // Added for AdMob
     compile 'com.google.android.gms:play-services:8.4.0'
-
     // Project dependency between the app and Java Library which provides jokes.
     compile project(':javajoketellinglibrary')
+    // Project dependency between the app and Android Library which launches joke containing Activity.
+    compile project(':androidjokeshowinglibrary')
 }

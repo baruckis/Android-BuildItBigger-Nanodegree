@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Android-BuildItBigger-Nanodegree.iml" filepath="$PROJECT_DIR$/Android-BuildItBigger-Nanodegree.iml" />
+      <module fileurl="file://$PROJECT_DIR$/androidjokeshowinglibrary/androidjokeshowinglibrary.iml" filepath="$PROJECT_DIR$/androidjokeshowinglibrary/androidjokeshowinglibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/javajoketellinglibrary/javajoketellinglibrary.iml" filepath="$PROJECT_DIR$/javajoketellinglibrary/javajoketellinglibrary.iml" />
     </modules>

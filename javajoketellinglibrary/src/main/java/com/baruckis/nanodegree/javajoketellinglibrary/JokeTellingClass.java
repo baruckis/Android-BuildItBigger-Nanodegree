@@ -1,4 +1,4 @@
-package com.baruckis.nanodegree;
+package com.baruckis.nanodegree.javajoketellinglibrary;
 
 public class JokeTellingClass {
 
