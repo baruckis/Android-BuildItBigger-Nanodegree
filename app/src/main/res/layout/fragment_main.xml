@@ -31,6 +31,14 @@
         android:onClick="launchJokeActivity"
         android:text="@string/android_library_button_text" />
 
+    <Button
+        android:id="@+id/android_gce_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/android_library_button"
+        android:onClick="runAsyncTask"
+        android:text="@string/android_gce_button_text" />
+
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
         android:layout_width="wrap_content"
@@ -38,6 +46,6 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         ads:adSize="BANNER"
-        ads:adUnitId="@string/banner_ad_unit_id"/>
+        ads:adUnitId="@string/banner_ad_unit_id" />
 
 </RelativeLayout>

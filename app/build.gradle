@@ -9,6 +9,8 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        // Enabling multidex support.
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -22,11 +24,12 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:23.1.1'
     // Added for AdMob
-    compile 'com.google.android.gms:play-services:8.4.0'
     // Project dependency between the app and Java Library which provides jokes.
     compile project(':javajoketellinglibrary')
     // Project dependency between the app and Android Library which launches joke containing Activity.
     compile project(':androidjokeshowinglibrary')
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.google.android.gms:play-services:8.4.0'
+    compile project(path: ':backend', configuration: 'android-endpoints')
 }
