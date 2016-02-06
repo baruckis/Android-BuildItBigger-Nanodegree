@@ -1,10 +1,7 @@
 package com.udacity.gradle.builditbigger;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 
-import com.baruckis.nanodegree.androidjokeshowinglibrary.JokeShowingActivity;
 import com.baruckis.nanodegree.builditbigger.backend.myApi.MyApi;
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
@@ -14,12 +11,24 @@ import java.io.IOException;
 /**
  * Created by Andrius-Baruckis.
  */
-public class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
+public class EndpointsAsyncTask extends AsyncTask<Void, Void, String> {
     private static MyApi myApiService = null;
-    private Context context;
+
+    private Callbacks callbacks;
+
+    public interface Callbacks {
+
+        void onAsyncTaskLoaded(String result);
+
+        void onAsyncTaskError();
+    }
+
+    public EndpointsAsyncTask(Callbacks callbacks) {
+        this.callbacks = callbacks;
+    }
 
     @Override
-    protected String doInBackground(Context... params) {
+    protected String doInBackground(Void... params) {
         if(myApiService == null) {  // Only do this once
 //            MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(),
 //                    new AndroidJsonFactory(), null)
@@ -33,15 +42,13 @@ public class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
 //                            abstractGoogleClientRequest.setDisableGZipContent(true);
 //                        }
 //                    });
-            // end options for devappserver
+//            // end options for devappserver
 
             MyApi.Builder builder = new MyApi.Builder(AndroidHttp.newCompatibleTransport(), new AndroidJsonFactory(), null)
                     .setRootUrl("https://baruckis-build-it-bigger.appspot.com/_ah/api/");
 
             myApiService = builder.build();
         }
-
-        context = params[0];
 
         try {
             return myApiService.tellJoke().execute().getData();
@@ -52,8 +59,12 @@ public class EndpointsAsyncTask extends AsyncTask<Context, Void, String> {
 
     @Override
     protected void onPostExecute(String result) {
-        Intent intent = new Intent(context, JokeShowingActivity.class);
-        intent.putExtra(JokeShowingActivity.JOKE_KEY, result);
-        context.startActivity(intent);
+        if (callbacks != null) {
+            if (result != null) {
+                callbacks.onAsyncTaskLoaded(result);
+            } else {
+                callbacks.onAsyncTaskError();
+            }
+        }
     }
 }

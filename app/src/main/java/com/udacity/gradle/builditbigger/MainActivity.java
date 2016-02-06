@@ -12,7 +12,7 @@ import com.baruckis.nanodegree.androidjokeshowinglibrary.JokeShowingActivity;
 import com.baruckis.nanodegree.javajoketellinglibrary.JokeTellingClass;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements EndpointsAsyncTask.Callbacks {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +58,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void runAsyncTask(View view) {
-        new EndpointsAsyncTask().execute(this);
+        new EndpointsAsyncTask(this).execute();
+    }
+
+    @Override
+    public void onAsyncTaskLoaded(String result) {
+        Intent intent = new Intent(this, JokeShowingActivity.class);
+        intent.putExtra(JokeShowingActivity.JOKE_KEY, result);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onAsyncTaskError() {
+        Toast.makeText(this, getString(R.string.async_task_error_msg), Toast.LENGTH_LONG).show();
     }
 }
