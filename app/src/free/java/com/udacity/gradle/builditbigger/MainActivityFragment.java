@@ -29,8 +29,10 @@ public class MainActivityFragment extends Fragment {
         // "Use AdRequest.Builder.addTestDevice("ABCDEF012345") to get test ads on this device."
         AdRequest adRequest = new AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR) // All emulators
+                .addTestDevice("A141C838968B2B54DAE7794022DC3778")
                 .build();
         mAdView.loadAd(adRequest);
+
         return root;
     }
 }
