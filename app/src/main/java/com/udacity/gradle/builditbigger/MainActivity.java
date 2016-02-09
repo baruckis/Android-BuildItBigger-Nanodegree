@@ -1,5 +1,6 @@
 package com.udacity.gradle.builditbigger;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,8 @@ import com.baruckis.nanodegree.javajoketellinglibrary.JokeTellingClass;
 
 
 public class MainActivity extends AppCompatActivity implements EndpointsAsyncTask.Callbacks {
+
+    private ProgressDialog mProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +61,17 @@ public class MainActivity extends AppCompatActivity implements EndpointsAsyncTas
     }
 
     public void runAsyncTask(View view) {
+
+        mProgressDialog = ProgressDialog.show(this, "", getString(R.string.loading_msg), true);
+
         new EndpointsAsyncTask(this).execute();
     }
 
     @Override
     public void onAsyncTaskLoaded(String result) {
+
+        mProgressDialog.dismiss();
+
         Intent intent = new Intent(this, JokeShowingActivity.class);
         intent.putExtra(JokeShowingActivity.JOKE_KEY, result);
         startActivity(intent);
@@ -70,6 +79,9 @@ public class MainActivity extends AppCompatActivity implements EndpointsAsyncTas
 
     @Override
     public void onAsyncTaskError() {
+
+        mProgressDialog.dismiss();
+
         Toast.makeText(this, getString(R.string.async_task_error_msg), Toast.LENGTH_LONG).show();
     }
 }
