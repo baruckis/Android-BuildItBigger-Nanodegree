@@ -17,3 +17,21 @@ allprojects {
         jcenter()
     }
 }
+
+
+// Gradle task that:
+// 1. Launches the GCE local development server;
+// 2. Runs all tests;
+// 3. Shuts the server down again.
+
+evaluationDependsOn ":app"
+evaluationDependsOn ":backend"
+
+project(":backend"){
+    appengine{
+        daemon true
+    }
+}
+
+task launchServerTestAllAndStop(dependsOn: ":backend:appengineRun") { }
+launchServerTestAllAndStop.finalizedBy([":app:connectedAndroidTest", ":backend:appengineStop"])
