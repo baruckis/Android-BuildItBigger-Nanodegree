@@ -10,6 +10,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.baruckis.nanodegree.androidjokeshowinglibrary.JokeShowingActivity;
+import com.baruckis.nanodegree.builditbigger.MessageDialog;
+import com.baruckis.nanodegree.builditbigger.Utils;
 import com.baruckis.nanodegree.javajoketellinglibrary.JokeTellingClass;
 
 
@@ -39,7 +41,15 @@ public class MainActivity extends AppCompatActivity implements EndpointsAsyncTas
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_about) {
+            MessageDialog.newInstance(
+                    R.drawable.ic_info_black_24dp,
+                    getString(R.string.about_title),
+                    getString(R.string.about_body,
+                            getString(R.string.app_name),
+                            Utils.getVersionName(this),
+                            Utils.getVersionCode(this)))
+                    .show(getFragmentManager(), MessageDialog.TAG);
             return true;
         }
 
